@@ -34,7 +34,8 @@
 
     "no-console": "warn",
 
-    "import/extensions": ["never"],
+    "import/extensions": ["off"],
+    "import/order": ["off"],
 
     "prettier/prettier": [
       "warn",
