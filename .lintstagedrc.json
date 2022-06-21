@@ -1,0 +1,3 @@
+{
+  "*.{ts,tsx}": ["pnpm prettier:fix", "pnpm lint:fix"]
+}
