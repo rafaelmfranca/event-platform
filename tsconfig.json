@@ -20,7 +20,7 @@
       "@/*": ["src/*"],
       "@components": ["src/components/index.ts"],
       "@pages": ["src/pages/index.ts"],
-      "@queries": ["src/queries/gql.ts"]
+      "@gql/*": ["src/gql/*"]
     }
   },
   "include": ["src"],
