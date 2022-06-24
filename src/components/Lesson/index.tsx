@@ -1,7 +1,7 @@
 import { format, isPast } from 'date-fns';
 import ptBr from 'date-fns/locale/pt-BR';
 import { CheckCircle, Lock } from 'phosphor-react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 interface ILessonProps {
   title: string;
@@ -11,6 +11,9 @@ interface ILessonProps {
 }
 
 export default function Lesson({ title, slug, availableAt, type }: ILessonProps) {
+  const { slug: activeSlug } = useParams<{ slug: string }>();
+
+  const isActiveLesson = slug === activeSlug;
   const isLessonAvailable = isPast(availableAt);
   const availableDateFormatted = format(availableAt, "EEEE' • 'd' de 'MMMM' • 'k'h'mm", {
     locale: ptBr,
@@ -18,12 +21,22 @@ export default function Lesson({ title, slug, availableAt, type }: ILessonProps)
 
   return (
     <Link to={`/event/lesson/${slug}`} className="group">
-      <span className="text-gray-300">{availableDateFormatted}</span>
+      <span className={`transition-colors ${isActiveLesson ? 'text-white' : 'text-gray-300'}`}>
+        {availableDateFormatted}
+      </span>
 
-      <div className="p-4 mt-2 border border-gray-500 rounded group-hover:border-teal-500">
+      <div
+        className={`p-4 mt-2 border border-gray-500 rounded group-hover:border-teal-500 transition-colors ${
+          isActiveLesson && 'bg-gray-900 border-teal-500'
+        }`}
+      >
         <header className="flex items-center justify-between">
           {isLessonAvailable ? (
-            <span className="flex items-center gap-2 text-sm font-medium text-cyan-500">
+            <span
+              className={`flex items-center gap-2 text-sm font-medium transition-colors ${
+                isActiveLesson ? 'text-teal-500' : 'text-cyan-500'
+              }`}
+            >
               <CheckCircle size={20} />
               Conteúdo liberado
             </span>
@@ -39,7 +52,13 @@ export default function Lesson({ title, slug, availableAt, type }: ILessonProps)
           </span>
         </header>
 
-        <strong className="block mt-5 text-gray-200">{title}</strong>
+        <strong
+          className={`block mt-5 transition-colors ${
+            isActiveLesson ? 'text-white' : 'text-gray-200'
+          }`}
+        >
+          {title}
+        </strong>
       </div>
     </Link>
   );
