@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/client';
 import { AnchorButton, AnchorCard, Avatar } from '@components';
-import { GET_LESSON_BY_SLUG_QUERY } from '@queries';
+import { GET_LESSON_BY_SLUG_QUERY } from '@gql/queries';
 import { DefaultUi, Player, Youtube } from '@vime/react';
 import { DiscordLogo, FileArrowDown, Image, Lightning } from 'phosphor-react';
 
@@ -26,6 +26,7 @@ interface IGetLessonBySlugResponse {
 export default function Video({ lessonSlug }: IVideoProps) {
   const { data } = useQuery<IGetLessonBySlugResponse>(GET_LESSON_BY_SLUG_QUERY, {
     variables: { slug: lessonSlug },
+    fetchPolicy: 'no-cache',
   });
 
   // TODO: Implement a loading spinner

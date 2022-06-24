@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/client';
 import { Lesson } from '@components';
-import { GET_LESSONS_QUERY } from '@queries';
+import { GET_LESSONS_QUERY } from '@gql/queries';
 
 interface IGetLessonsQueryResponse {
   lessons: {
