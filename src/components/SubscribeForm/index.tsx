@@ -1,5 +1,4 @@
-import { CREATE_SUBSCRIBER_MUTATION } from '@/gql/mutations';
-import { useMutation } from '@apollo/client';
+import { useCreateSubscriberMutation } from '@/gql/generated';
 import { FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -9,7 +8,7 @@ export default function SubscribeForm() {
 
   const navigate = useNavigate();
 
-  const [createSubscriber, { loading }] = useMutation(CREATE_SUBSCRIBER_MUTATION);
+  const [createSubscriber, { loading }] = useCreateSubscriberMutation();
 
   const handleSubscribe = async (e: FormEvent) => {
     e.preventDefault();

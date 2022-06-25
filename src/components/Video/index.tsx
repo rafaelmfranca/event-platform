@@ -1,36 +1,22 @@
-import { useQuery } from '@apollo/client';
 import { AnchorButton, AnchorCard, Avatar } from '@components';
-import { GET_LESSON_BY_SLUG_QUERY } from '@gql/queries';
 import { DefaultUi, Player, Youtube } from '@vime/react';
 import { DiscordLogo, FileArrowDown, Image, Lightning } from 'phosphor-react';
 
+import { useGetLessonBySlugQuery } from '@/gql/generated';
 import '@vime/core/themes/default.css';
 
 interface IVideoProps {
   lessonSlug: string;
 }
 
-interface IGetLessonBySlugResponse {
-  lesson: {
-    title: string;
-    videoId: string;
-    description: string;
-    teacher: {
-      bio: string;
-      name: string;
-      avatarURL: string;
-    };
-  };
-}
-
 export default function Video({ lessonSlug }: IVideoProps) {
-  const { data } = useQuery<IGetLessonBySlugResponse>(GET_LESSON_BY_SLUG_QUERY, {
+  const { data } = useGetLessonBySlugQuery({
     variables: { slug: lessonSlug },
     fetchPolicy: 'no-cache',
   });
 
   // TODO: Implement a loading spinner
-  if (!data) {
+  if (!data || !data.lesson) {
     return (
       <div className="flex-1">
         <p>Loading...</p>
@@ -43,7 +29,7 @@ export default function Video({ lessonSlug }: IVideoProps) {
       <div className="flex justify-center bg-black">
         <div className="h-full w-full max-w-[1100px] max-h-[60vh] aspect-video">
           <Player>
-            <Youtube videoId={data?.lesson.videoId} />
+            <Youtube videoId={data.lesson.videoId} />
             <DefaultUi />
           </Player>
         </div>
@@ -52,16 +38,18 @@ export default function Video({ lessonSlug }: IVideoProps) {
       <div className="p-8 max-w-[1100px] mx-auto">
         <div className="flex items-start gap-16">
           <div className="flex-1">
-            <h1 className="text-2xl font-bold">{data?.lesson.title}</h1>
-            <p className="mt-4 leading-relaxed text-gray-200">{data?.lesson.description}</p>
+            <h1 className="text-2xl font-bold">{data.lesson.title}</h1>
+            <p className="mt-4 leading-relaxed text-gray-200">{data.lesson.description}</p>
 
-            <div className="flex items-center gap-4 mt-6">
-              <Avatar
-                name={data?.lesson.teacher.name}
-                bio={data?.lesson.teacher.bio}
-                avatarURL={data?.lesson.teacher.avatarURL}
-              />
-            </div>
+            {data.lesson.teacher && (
+              <div className="flex items-center gap-4 mt-6">
+                <Avatar
+                  name={data.lesson.teacher.name}
+                  bio={data.lesson.teacher.bio}
+                  avatarURL={data.lesson.teacher.avatarURL}
+                />
+              </div>
+            )}
           </div>
 
           <div className="flex flex-col gap-4">
