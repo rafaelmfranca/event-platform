@@ -19,8 +19,7 @@
     "paths": {
       "@/*": ["src/*"],
       "@components": ["src/components/index.ts"],
-      "@pages": ["src/pages/index.ts"],
-      "@gql/*": ["src/gql/*"]
+      "@pages": ["src/pages/index.ts"]
     }
   },
   "include": ["src"],
