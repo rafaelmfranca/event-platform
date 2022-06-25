@@ -11,7 +11,8 @@
     "prepare": "husky install",
     "prettier": "prettier src --check",
     "prettier:fix": "prettier --write src",
-    "lint-staged": "lint-staged"
+    "lint-staged": "lint-staged",
+    "codegen": "graphql-codegen"
   },
   "dependencies": {
     "@apollo/client": "^3.6.8",
@@ -27,6 +28,10 @@
   "devDependencies": {
     "@commitlint/cli": "^17.0.2",
     "@commitlint/config-conventional": "^17.0.2",
+    "@graphql-codegen/cli": "^2.6.2",
+    "@graphql-codegen/typescript": "^2.5.1",
+    "@graphql-codegen/typescript-operations": "^2.4.2",
+    "@graphql-codegen/typescript-react-apollo": "^3.2.16",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
     "@typescript-eslint/eslint-plugin": "^5.29.0",
