@@ -5,7 +5,7 @@
 - React
 - Typescript
 - Tailwind CSS
-- Headless CMS (Content Management System) com graphcms
+- Headless CMS (Content Management System) with graphcms
 - @apollo/client and Graphql
 - svg2jsx to generate an SVG component (https://svg2jsx.com/)
 - Phosphor icon family (https://phosphoricons.com/)
