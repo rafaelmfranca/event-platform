@@ -1,3 +1,4 @@
+import mockup from '@/assets/code_mockup.png';
 import { Logo, SubscribeForm } from '@components';
 
 export default function Subscribe() {
@@ -22,7 +23,7 @@ export default function Subscribe() {
         </div>
       </div>
 
-      <img src="/src/assets/code_mockup.png" className="mt-10" alt="" />
+      <img src={mockup} className="mt-10" alt="" />
     </div>
   );
 }
